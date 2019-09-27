@@ -9,6 +9,9 @@
     Dim isGlassAdded As Boolean = False
     Dim isConAdded As Boolean = False
     Dim removedItem As String
+    Dim inPowerMode As Boolean = False
+    Dim table1 As DataTable
+    Dim column As New DataColumn
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Try
             If canAddedGlass = True Then
@@ -64,6 +67,12 @@
             newController.Width = cWidth
             newController.BackColor = cColor
             newController.Location = New Point(startX + 10.5, 47)
+            Dim row As DataRow = table1.Rows.Add()
+            row("ID") = counter
+            row("type") = type
+            row("xAx") = newController.Location.X
+            row("yAx") = newController.Location.Y
+            'UltraGrid1.Visible = False
             'newController.FlatStyle = FlatStyle.Flat
             AddHandler newController.MouseClick, AddressOf LblG1_MouseDown
             AddHandler newController.MouseMove, AddressOf LblG1_MouseMove
@@ -81,6 +90,41 @@
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
             startX = lblIS1.Left
+            For Each subController As Control In Me.Controls
+                AddHandler subController.KeyDown, AddressOf MySub
+            Next
+            table1 = New DataTable
+
+            column = table1.Columns.Add("Index", Type.GetType("System.Int32"))
+            column.AllowDBNull = False
+            column.AutoIncrement = True
+            column.DefaultValue = 0
+
+            column = table1.Columns.Add("ID", Type.GetType("System.Int32"))
+            column.AllowDBNull = False
+            column.DefaultValue = 0
+
+            column = table1.Columns.Add("type", Type.GetType("System.String"))
+            column.AllowDBNull = False
+            column.DefaultValue = ""
+
+            column = table1.Columns.Add("xAx", Type.GetType("System.Int32"))
+            column.AllowDBNull = False
+            column.DefaultValue = 0
+
+            column = table1.Columns.Add("yAx", Type.GetType("System.Int32"))
+            column.AllowDBNull = False
+            column.DefaultValue = 0
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Sub MySub(sender As Object, e As KeyEventArgs)
+        Try
+            If inPowerMode Then
+                TextBox1.Select()
+            End If
         Catch ex As Exception
 
         End Try
@@ -209,7 +253,7 @@ StartPosition:
             For Each subController As Control In Panel1.Controls
                 If deleteArray.Contains(subController.Name) Then
                     RemoveHandler subController.MouseClick, AddressOf LblG1_MouseDown
-                    'RemoveHandler subController.MouseMove, AddressOf LblG1_MouseMove
+                    RemoveHandler subController.MouseMove, AddressOf LblG1_MouseMove
                     RemoveHandler subController.MouseLeave, AddressOf LblG1_MouseLeave
                     RemoveHandler subController.Click, AddressOf MyFunc2
                     RemoveHandler subController.MouseEnter, AddressOf showItem
@@ -251,4 +295,17 @@ StartPosition:
         End Try
     End Sub
 
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        Try
+            Dim message As New Label
+            message.Text = "In Power Mode"
+            Using f As System.Drawing.Font = message.Font
+                message.Font = New System.Drawing.Font(f.FontFamily, f.Size + 20, f.Style)
+            End Using
+            message.Location = New Point(Button6.Location.X, Button6.Location.Y)
+            inPowerMode = True
+        Catch ex As Exception
+
+        End Try
+    End Sub
 End Class
