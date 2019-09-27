@@ -29,6 +29,8 @@ Partial Class Form1
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.Button4 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'lblG1
@@ -106,13 +108,31 @@ Partial Class Form1
         Me.Button2.Text = "Add consumable"
         Me.Button2.UseVisualStyleBackColor = False
         '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(349, 3)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(451, 20)
+        Me.TextBox1.TabIndex = 6
+        '
+        'Button4
+        '
+        Me.Button4.Location = New System.Drawing.Point(267, 2)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(75, 23)
+        Me.Button4.TabIndex = 5
+        Me.Button4.Text = "Delete"
+        Me.Button4.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.Button3)
+        Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.lblIS1)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
@@ -122,6 +142,7 @@ Partial Class Form1
         Me.Name = "Form1"
         Me.Text = "Form1"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -132,4 +153,6 @@ Partial Class Form1
     Friend WithEvents Panel1 As Panel
     Friend WithEvents Button3 As Button
     Friend WithEvents Button2 As Button
+    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents Button4 As Button
 End Class
